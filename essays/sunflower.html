@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Sunflower without a Sun | The Unsent Letters & Stories</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="article-page">
+
+    <div id="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">
+            <a href="../index.html">
+                <span class="site-title">The Unsent Letters</span>
+                <span class="site-subtitle">& Stories</span>
+            </a>
+        </div>
+
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul class="nav-menu">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../essays.html">Personal Essays</a></li>
+            <li><a href="../quotes.html">Favorite Lines</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">More ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Poems</a></li>
+                    <li><a href="#">Short Stories</a></li>
+                    <li><a href="#">Novels</a></li>
+                    <li><a href="#">Articles</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header reveal">
+        <span class="article-icon">&#127803;</span>
+        <h1>A Sunflower without a Sun</h1>
+        <p class="article-subtitle">&ldquo;The brightest flowers still bloom, even when they search for their sun.&rdquo;</p>
+        <div class="article-meta">
+            <span>March 20, 2026</span>
+            <span>4 min read</span>
+            <span>Personal Essay</span>
+        </div>
+    </header>
+
+    <div class="article-separator">&#9676; &#9676; &#9676;</div>
+
+    <!-- Article Content -->
+    <article class="article-content reveal">
+        <p>
+            People admire sunflowers for their bright and warm petals. Few people know their quiet habit. When young, a sunflower follows the sun across the sky. Morning pulls it east. Evening pulls it west.
+        </p>
+
+        <p>
+            At night it turns back again. It faces the east and waits for morning.
+        </p>
+
+        <p>
+            The sun never notices. It shines over fields, rivers, cities, and mountains without stopping for a single flower.
+        </p>
+
+        <p>
+            Still the sunflower turns.
+        </p>
+
+        <p>
+            That small truth feels painfully human. Sometimes a person waits the same way. You keep your heart facing one person. You hold on to every smile and every small moment. You believe that one day they will look back.
+        </p>
+
+        <p>
+            So you wait.
+        </p>
+
+        <p>
+            Days pass. Weeks pass. Your world moves around the same light.
+        </p>
+
+        <p>
+            Then one quiet day the truth settles in your chest.
+        </p>
+
+        <blockquote>
+            The sun never loved the sunflower. The sunflower only loved the sun.
+        </blockquote>
+
+        <p>
+            Yet the flower still grows tall. It does not close. It does not wither in shame. It simply grows, carrying the warmth it once followed.
+        </p>
+
+        <p>
+            Perhaps that is the quiet courage of love.
+        </p>
+
+        <p class="closing-line">
+            Even when the sun never turns, the flower still blooms.
+        </p>
+    </article>
+
+    <!-- Share Card -->
+    <section class="share-card reveal">
+        <h3>Enjoyed this piece?</h3>
+        <p>Share a favorite quote with your friends.</p>
+        <button class="btn" onclick="openShareModal()">Share Quote</button>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="letters-section reveal">
+        <div class="letters-header">
+            <div class="flower-decoration">&#9676; &#9676; &#9676;</div>
+            <h2>Quote from this Essay</h2>
+        </div>
+
+        <div class="quote-card" style="background: var(--white); border-radius: var(--radius-lg); padding: var(--space-lg); text-align: center; box-shadow: var(--shadow-sm);">
+            <p style="font-family: var(--font-heading); font-size: 26px; font-style: italic; color: var(--text-secondary); line-height: 1.5; margin-bottom: var(--space-sm);">
+                &ldquo;Even when the sun never turns, the flower still blooms.&rdquo;
+            </p>
+            <p style="font-family: var(--font-nav); font-size: 13px; color: var(--text-muted);">&mdash; A Sunflower without a Sun</p>
+            <button class="btn btn-outline" style="margin-top: var(--space-md); padding: 10px 24px; font-size: 13px;" type="button">Copy Quote</button>
+        </div>
+    </section>
+
+    <!-- Letters Section -->
+    <section class="letters-section reveal">
+        <div class="flower-decoration">&#9676; &#9676; &#9676;</div>
+        <div class="letters-header">
+            <h2>Leave a Letter</h2>
+            <p>Every story finds a reader. If these words found you, you're welcome to leave a letter.</p>
+        </div>
+
+        <form id="letterForm" class="letter-form">
+            <input type="text" id="readerName" placeholder="Your name (or a nickname)" maxlength="40" required>
+            <textarea id="readerLetter" placeholder="Write your thoughts here..." maxlength="800" required></textarea>
+            <button type="submit">Leave this Letter</button>
+        </form>
+    </section>
+
+    <!-- Reader Letters -->
+    <section class="reader-letters reveal">
+        <h2>Letters from Readers</h2>
+        <p class="no-letters">Be the first to leave a letter.</p>
+        <div id="lettersContainer"></div>
+    </section>
+
+    <!-- Garden Letters -->
+    <section class="garden-letters reveal">
+        <div class="garden-header">
+            <h2>Letters Kept in the Garden</h2>
+            <p>Some words deserve to stay forever. These are letters kept close by the author.</p>
+        </div>
+
+        <div class="garden-container">
+            <article class="garden-letter">
+                <h3>Maria</h3>
+                <p>Your words reminded me that even quiet stories can reach someone who needs them.</p>
+            </article>
+            <article class="garden-letter">
+                <h3>A Reader</h3>
+                <p>Thank you for sharing your thoughts. Your stories feel like pages from a journal.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Article Navigation -->
+    <nav class="article-nav">
+        <a href="../essays.html">&larr; Back to Library</a>
+        <a href="blizzard.html">Next Essay &rarr;</a>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <h2 class="footer-title">The Unsent Letters & Stories</h2>
+        <p>A home for quiet thoughts, heartfelt stories, and words left unsent.</p>
+
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../essays.html">Personal Essays</a>
+            <a href="../about.html">About</a>
+        </div>
+
+        <p class="footer-copy">&copy; 2026 Ayhen Narciso. All Rights Reserved.</p>
+    </footer>
+
+    <button id="topButton" aria-label="Back to top">&uarr;</button>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="share-modal">
+        <div class="share-modal-content">
+            <span class="close-share">&times;</span>
+            <h2 style="font-family: var(--font-heading); font-size: 24px; color: var(--forest);">Carry this piece with you</h2>
+            <p style="color: var(--text-muted); font-size: 14px; margin-top: var(--space-xs);">If these words stayed with you, perhaps they'll stay with someone else too.</p>
+            <div class="share-actions">
+                <button onclick="downloadQuoteCard()" class="share-action-btn">Download Quote Card</button>
+                <button onclick="copyLink()" class="share-action-btn">Copy Essay Link</button>
+                <button onclick="shareFacebook()" class="share-action-btn">Share on Facebook</button>
+                <button onclick="shareX()" class="share-action-btn">Share on X</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

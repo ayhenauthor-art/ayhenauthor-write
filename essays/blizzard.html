@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blizzard of Judgement | The Unsent Letters & Stories</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="article-page">
+
+    <div id="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">
+            <a href="../index.html">
+                <span class="site-title">The Unsent Letters</span>
+                <span class="site-subtitle">& Stories</span>
+            </a>
+        </div>
+
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul class="nav-menu">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../essays.html">Personal Essays</a></li>
+            <li><a href="../quotes.html">Favorite Lines</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">More ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Poems</a></li>
+                    <li><a href="#">Short Stories</a></li>
+                    <li><a href="#">Novels</a></li>
+                    <li><a href="#">Articles</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header reveal">
+        <span class="article-icon">&#10052;</span>
+        <h1>Blizzard of Judgement</h1>
+        <div class="article-meta">
+            <span>July 16, 2026</span>
+            <span>3 min read</span>
+            <span>Personal Essay</span>
+        </div>
+    </header>
+
+    <div class="article-separator">&#9676; &#9676; &#9676;</div>
+
+    <!-- Article Content -->
+    <article class="article-content reveal">
+        <p>
+            A person who has a finger in every pie is someone who is lonely or full of hatred&mdash;not because they like to meddle with other people's affairs, but because they're insecure.
+        </p>
+
+        <p>
+            What a vile accusation.
+        </p>
+
+        <p>
+            Personally, I do believe in the good of others. But understanding an individual is a different kind of story. Knowing a person requires more than observation. It requires a genuine connection.
+        </p>
+
+        <p>
+            Sometimes, beneath scattered noon clouds, I wonder about the thoughts of strangers. They can be good or bad. I think of their judgement not because I find myself lacking, but because I'm curious about someone's mindset.
+        </p>
+
+        <p>
+            I'm curious about how they think, act, or even make heavy decisions. Having the chance to truly know a person is fascinating. You become an investigator searching for answers about what they love and what they fear.
+        </p>
+
+        <p>
+            Occasionally, I empty my own plate just to fill someone else's bowl. I tend to give myself completely whenever I befriend someone. That's where it always goes wrong. I choose their convenience over mine for the sake of what I believed was friendship.
+        </p>
+
+        <p>
+            There came moments when I quietly asked myself,
+        </p>
+
+        <blockquote>
+            &ldquo;Is this really a friendship?&rdquo;
+        </blockquote>
+
+        <p>
+            That question became the sign to finally start listening&mdash;not to the noise around me, but to myself.
+        </p>
+
+        <p>
+            Listen to your own thoughts.
+            Listen to your own emotions.
+            Allow them to be felt.
+        </p>
+
+        <p>
+            Perhaps judgement is not something to fear, but something to sharpen. Trust someone only if they have proven themselves trustworthy.
+        </p>
+
+        <p class="closing-line">
+            I choose to carry a blizzard of judgement, because at the end of the day, the person who stays with me the longest is myself.
+        </p>
+    </article>
+
+    <!-- Share Card -->
+    <section class="share-card reveal">
+        <h3>Enjoyed this piece?</h3>
+        <p>Share a favorite quote with your friends.</p>
+        <button class="btn" onclick="openShareModal()">Share Quote</button>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="letters-section reveal">
+        <div class="letters-header">
+            <div class="flower-decoration">&#9676; &#9676; &#9676;</div>
+            <h2>Quote from this Essay</h2>
+        </div>
+
+        <div class="quote-card" style="background: var(--white); border-radius: var(--radius-lg); padding: var(--space-lg); text-align: center; box-shadow: var(--shadow-sm);">
+            <p style="font-family: var(--font-heading); font-size: 26px; font-style: italic; color: var(--text-secondary); line-height: 1.5; margin-bottom: var(--space-sm);">
+                &ldquo;Some winters are not meant to be survived, only carried with grace.&rdquo;
+            </p>
+            <p style="font-family: var(--font-nav); font-size: 13px; color: var(--text-muted);">&mdash; The Winter Archive</p>
+            <button class="btn btn-outline" style="margin-top: var(--space-md); padding: 10px 24px; font-size: 13px;" type="button">Copy Quote</button>
+        </div>
+    </section>
+
+    <!-- Letters Section -->
+    <section class="letters-section reveal">
+        <div class="flower-decoration">&#9676; &#9676; &#9676;</div>
+        <div class="letters-header">
+            <h2>Leave a Letter</h2>
+            <p>Every story finds a reader. If these words found you, you're welcome to leave a letter.</p>
+        </div>
+
+        <form id="letterForm" class="letter-form">
+            <input type="text" id="readerName" placeholder="Your name (or a nickname)" maxlength="40" required>
+            <textarea id="readerLetter" placeholder="Write your thoughts here..." maxlength="800" required></textarea>
+            <button type="submit">Leave this Letter</button>
+        </form>
+    </section>
+
+    <!-- Reader Letters -->
+    <section class="reader-letters reveal">
+        <h2>Letters from Readers</h2>
+        <p class="no-letters">Be the first to leave a letter.</p>
+        <div id="lettersContainer"></div>
+    </section>
+
+    <!-- Garden Letters -->
+    <section class="garden-letters reveal">
+        <div class="garden-header">
+            <h2>Letters Kept in the Garden</h2>
+            <p>Some words deserve to stay forever. These are letters kept close by the author.</p>
+        </div>
+
+        <div class="garden-container">
+            <article class="garden-letter">
+                <h3>Maria</h3>
+                <p>Your words reminded me that even quiet stories can reach someone who needs them.</p>
+            </article>
+            <article class="garden-letter">
+                <h3>A Reader</h3>
+                <p>Thank you for sharing your thoughts. Your stories feel like pages from a journal.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Article Navigation -->
+    <nav class="article-nav">
+        <a href="sunflower.html">&larr; Previous Essay</a>
+        <a href="eccentric.html">Next Essay &rarr;</a>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <h2 class="footer-title">The Unsent Letters & Stories</h2>
+        <p>A home for quiet thoughts, heartfelt stories, and words left unsent.</p>
+
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../essays.html">Personal Essays</a>
+            <a href="../about.html">About</a>
+        </div>
+
+        <p class="footer-copy">&copy; 2026 Ayhen Narciso. All Rights Reserved.</p>
+    </footer>
+
+    <button id="topButton" aria-label="Back to top">&uarr;</button>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="share-modal">
+        <div class="share-modal-content">
+            <span class="close-share">&times;</span>
+            <h2 style="font-family: var(--font-heading); font-size: 24px; color: var(--forest);">Carry this piece with you</h2>
+            <p style="color: var(--text-muted); font-size: 14px; margin-top: var(--space-xs);">If these words stayed with you, perhaps they'll stay with someone else too.</p>
+            <div class="share-actions">
+                <button onclick="downloadQuoteCard()" class="share-action-btn">Download Quote Card</button>
+                <button onclick="copyLink()" class="share-action-btn">Copy Essay Link</button>
+                <button onclick="shareFacebook()" class="share-action-btn">Share on Facebook</button>
+                <button onclick="shareX()" class="share-action-btn">Share on X</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

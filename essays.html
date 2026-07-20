@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Essays | The Unsent Letters & Stories</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">
+            <a href="index.html">
+                <span class="site-title">The Unsent Letters</span>
+                <span class="site-subtitle">& Stories</span>
+            </a>
+        </div>
+
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="essays.html" class="active">Personal Essays</a></li>
+            <li><a href="quotes.html">Favorite Lines</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">More ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Poems</a></li>
+                    <li><a href="#">Short Stories</a></li>
+                    <li><a href="#">Novels</a></li>
+                    <li><a href="#">Articles</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Library Section -->
+    <section class="essay-library reveal">
+        <h1>Personal Essays</h1>
+
+        <p class="library-intro">
+            A collection of thoughts, memories, quiet reflections, and emotions that found their way onto paper.
+        </p>
+
+        <div class="search-container">
+            <input
+                type="text"
+                id="essaySearch"
+                placeholder="Search essays..."
+                onkeyup="searchEssays()">
+        </div>
+
+        <div class="essay-grid">
+            <div class="essay-card">
+                <span class="card-icon">&#127803;</span>
+                <h2>A Sunflower without a Sun</h2>
+                <p class="card-desc">Love, longing, and learning to bloom alone.</p>
+                <blockquote>&ldquo;The brightest flowers still bloom, even when they search for their sun.&rdquo;</blockquote>
+                <a href="essays/sunflower.html" class="btn-read">Read &rarr;</a>
+            </div>
+
+            <div class="essay-card">
+                <span class="card-icon">&#10052;</span>
+                <h2>Blizzard of Judgement</h2>
+                <p class="card-desc">When criticism becomes louder than kindness.</p>
+                <blockquote>&ldquo;Not every cold season is meant to freeze you forever.&rdquo;</blockquote>
+                <a href="essays/blizzard.html" class="btn-read">Read &rarr;</a>
+            </div>
+
+            <div class="essay-card">
+                <span class="card-icon">&#129419;</span>
+                <h2>Eccentric Feeling</h2>
+                <p class="card-desc">The beauty of being different.</p>
+                <blockquote>&ldquo;Perhaps being different is another way of being honest.&rdquo;</blockquote>
+                <a href="essays/eccentric.html" class="btn-read">Read &rarr;</a>
+            </div>
+
+            <div class="essay-card">
+                <span class="card-icon">&#127769;</span>
+                <h2>Moonbound</h2>
+                <p class="card-desc">A quiet journey beneath the moon.</p>
+                <blockquote>&ldquo;The moon never apologizes for shining from afar.&rdquo;</blockquote>
+                <a href="essays/moonbound.html" class="btn-read">Read &rarr;</a>
+            </div>
+
+            <div class="essay-card">
+                <span class="card-icon">&#127793;</span>
+                <h2>The Everlasting Peace</h2>
+                <p class="card-desc">Finding calm after life's storms.</p>
+                <blockquote>&ldquo;Peace is not found&mdash;it is grown quietly within.&rdquo;</blockquote>
+                <a href="essays/peace.html" class="btn-read">Read &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <h2 class="footer-title">The Unsent Letters & Stories</h2>
+        <p>A home for quiet thoughts, heartfelt stories, and words left unsent.</p>
+
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="essays.html">Personal Essays</a>
+            <a href="about.html">About</a>
+        </div>
+
+        <p class="footer-copy">&copy; 2026 Ayhen Narciso. All Rights Reserved.</p>
+    </footer>
+
+    <button id="topButton" aria-label="Back to top">&uarr;</button>
+
+    <script src="script.js"></script>
+</body>
+</html>

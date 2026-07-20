@@ -1,2 +1,8 @@
-# ayhenauthor-write
-Official author website featuring poems, essays, short stories, and novels.
+# The Unsent Letters & Stories
+
+A personal literary website by Ayhen Narciso.
+
+This collection contains personal essays, reflections, and creative writing.
+
+© 2026 Ayhen Narciso.
+All Rights Reserved.
