@@ -88,6 +88,89 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =====================================
+  // GUIDE TO THE ARCHIVE
+  // =====================================
+
+  const archiveRoot = window.location.pathname.includes('/essays/') ? '../' : '';
+  const archiveGuide = document.createElement('div');
+  archiveGuide.className = 'archive-guide';
+  archiveGuide.innerHTML = `
+    <button class="archive-guide-trigger" type="button" aria-label="Open Guide to the Archive" aria-expanded="false" aria-controls="archiveGuideModal">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 0 4 21.5v-16Z"></path><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v16h5.5a2.5 2.5 0 0 1 2.5 2.5v-16Z"></path></svg>
+      <span>Guide to the Archive</span>
+    </button>
+    <div class="archive-guide-modal" id="archiveGuideModal" role="dialog" aria-modal="true" aria-labelledby="archiveGuideTitle" aria-describedby="archiveGuideDescription" aria-hidden="true">
+      <div class="archive-guide-panel" role="document">
+        <button class="archive-guide-close" type="button" aria-label="Close Guide to the Archive">&times;</button>
+        <p class="archive-guide-eyebrow">The Unsent Letters &amp; Stories</p>
+        <h2 id="archiveGuideTitle">Guide to the Archive</h2>
+        <p class="archive-guide-intro" id="archiveGuideDescription">A small compass for finding your way through the collection.</p>
+        <nav class="archive-guide-nav" aria-label="Archive sections">
+          <a href="${archiveRoot}index.html"><span>Home</span><small>Begin among the quiet thoughts and newest stories gathered here.</small></a>
+          <a href="${archiveRoot}about.html"><span>About</span><small>Learn about the writer and the heart behind this growing library.</small></a>
+          <a href="${archiveRoot}essays.html"><span>Essays</span><small>Read personal reflections on love, longing, hope, and becoming.</small></a>
+          <a href="${archiveRoot}quotes.html"><span>Quotes</span><small>Linger with favorite lines that deserve to be carried a little longer.</small></a>
+          <a href="${archiveRoot}index.html#socials"><span>Socials</span><small>Find ways to share a favorite piece and stay connected to the archive.</small></a>
+          <a href="${archiveRoot}index.html#coming-soon"><span>Coming Soon</span><small>Look ahead to poems, short stories, novels, and articles still taking shape.</small></a>
+        </nav>
+      </div>
+    </div>`;
+  document.body.appendChild(archiveGuide);
+
+  const guideTrigger = archiveGuide.querySelector('.archive-guide-trigger');
+  const guideModal = archiveGuide.querySelector('.archive-guide-modal');
+  const guideClose = archiveGuide.querySelector('.archive-guide-close');
+  const guidePanel = archiveGuide.querySelector('.archive-guide-panel');
+  const guideLinks = archiveGuide.querySelectorAll('.archive-guide-nav a');
+  let lastFocusedElement;
+
+  const closeArchiveGuide = () => {
+    guideModal.classList.remove('is-open');
+    guideModal.setAttribute('aria-hidden', 'true');
+    guideTrigger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('archive-guide-open');
+    lastFocusedElement?.focus();
+  };
+
+  const openArchiveGuide = () => {
+    lastFocusedElement = document.activeElement;
+    guideModal.classList.add('is-open');
+    guideModal.setAttribute('aria-hidden', 'false');
+    guideTrigger.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('archive-guide-open');
+    guideClose.focus();
+  };
+
+  guideTrigger.addEventListener('click', openArchiveGuide);
+  guideClose.addEventListener('click', closeArchiveGuide);
+  guideLinks.forEach(link => link.addEventListener('click', closeArchiveGuide));
+  guideModal.addEventListener('click', event => { if (event.target === guideModal) closeArchiveGuide(); });
+
+  document.addEventListener('keydown', event => {
+    if (!guideModal.classList.contains('is-open')) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeArchiveGuide();
+      return;
+    }
+    if (event.key === 'Tab') {
+      const focusable = guidePanel.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])');
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  document.querySelector('.coming-section')?.setAttribute('id', 'coming-soon');
+  document.querySelector('.site-footer')?.setAttribute('id', 'socials');
+
+  // =====================================
   // READING PROGRESS BAR
   // =====================================
 
