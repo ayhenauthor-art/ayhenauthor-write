@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raindrops | The Unsent Letters & Stories</title>
+    <script src="../theme.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="article-page poem-raindrops">
+
+    <div id="progress-bar"></div>
+
+    <!-- Decorative Raindrops -->
+    <div class="poem-raindrops-container" aria-hidden="true">
+        <div class="poem-raindrop"></div>
+        <div class="poem-raindrop"></div>
+        <div class="poem-raindrop"></div>
+        <div class="poem-raindrop"></div>
+        <div class="poem-raindrop"></div>
+        <div class="poem-raindrop"></div>
+        <div class="poem-raindrop"></div>
+        <div class="poem-raindrop"></div>
+        <div class="poem-raindrop"></div>
+        <div class="poem-raindrop"></div>
+        <div class="poem-raindrop"></div>
+        <div class="poem-raindrop"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">
+            <a href="../index.html">
+                <span class="site-title">The Unsent Letters</span>
+                <span class="site-subtitle">& Stories</span>
+            </a>
+        </div>
+
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul class="nav-menu">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../quotes.html">Favorite Lines</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Categories ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../essays.html">Personal Essays</a></li>
+                    <li><a href="index.html" class="active">Poems</a></li>
+                    <li><a href="#">Short Stories</a></li>
+                    <li><a href="#">Novels</a></li>
+                    <li><a href="#">Articles</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header reveal">
+        <span class="article-icon">&#127800;</span>
+        <h1>Raindrops</h1>
+        <div class="article-meta">
+            <span>July 22, 2026</span>
+            <span>1 min read</span>
+            <span>Poem</span>
+        </div>
+    </header>
+
+    <div class="article-separator">&#9676; &#9676; &#9676;</div>
+
+    <!-- Poem Content -->
+    <article class="article-content reveal">
+        <div class="poem-stanza">
+            <p>Skies shine bright, each day a brand-new start.</p>
+            <p>Some days grow dark, and test the strongest heart.</p>
+            <p>Perfect days are never guaranteed,</p>
+            <p>Yet every trial plants another seed.</p>
+        </div>
+
+        <div class="poem-stanza">
+            <p>This world is filled with endless chaos.</p>
+            <p>Many wander, burdened by their loss.</p>
+            <p>Yet hope is real, though unseen like a ghost.</p>
+            <p>Hold on to it, for it will cost the least.</p>
+        </div>
+
+        <div class="poem-stanza">
+            <p>We live within a cycle full of wonder,</p>
+            <p>Flowing gently, much like running water.</p>
+            <p>Take the falling rain as an example.</p>
+            <p>It cleanses the earth and helps new life grow.</p>
+        </div>
+
+        <div class="poem-stanza">
+            <p>Starting again is nature's quiet way.</p>
+            <p>Sometimes it will leave behind deep pain.</p>
+            <p>Yet accepting every scar and stain</p>
+            <p>Is the bravest choice you'll ever make.</p>
+        </div>
+    </article>
+
+    <!-- Share Card -->
+    <section class="share-card reveal">
+        <h3>Enjoyed this piece?</h3>
+        <p>Share a favorite line with your friends.</p>
+        <button class="btn" onclick="openShareModal()">Share Quote</button>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="letters-section reveal">
+        <div class="letters-header">
+            <div class="flower-decoration">&#9676; &#9676; &#9676;</div>
+            <h2>Quote from this Poem</h2>
+        </div>
+
+        <div class="quote-card">
+            <p class="quote-text">
+                &ldquo;Yet hope is real, though unseen like a ghost. Hold on to it, for it will cost the least.&rdquo;
+            </p>
+            <p class="quote-author">&mdash; Raindrops</p>
+            <button class="btn btn-outline copy-quote" type="button">Copy Quote</button>
+        </div>
+    </section>
+
+    <!-- Letters Section -->
+    <section class="letters-section reveal">
+        <div class="flower-decoration">&#9676; &#9676; &#9676;</div>
+        <div class="letters-header">
+            <h2>Leave a Letter</h2>
+            <p>Every story finds a reader. If these words found you, you're welcome to leave a letter.</p>
+        </div>
+
+        <form id="letterForm" class="letter-form">
+            <input type="text" id="readerName" placeholder="Your name (or a nickname)" maxlength="40" required>
+            <textarea id="readerLetter" placeholder="Write your thoughts here..." maxlength="800" required></textarea>
+            <button type="submit">Leave this Letter</button>
+        </form>
+    </section>
+
+    <!-- Reader Letters -->
+    <section class="reader-letters reveal">
+        <h2>Letters from Readers</h2>
+        <p class="no-letters">Be the first to leave a letter.</p>
+        <div id="lettersContainer"></div>
+    </section>
+
+    <!-- Garden Letters -->
+    <section class="garden-letters reveal">
+        <div class="garden-header">
+            <h2>Letters Kept in the Garden</h2>
+            <p>Some words deserve to stay forever. These are letters kept close by the author.</p>
+        </div>
+
+        <div class="garden-container">
+            <article class="garden-letter">
+                <h3>Maria</h3>
+                <p>Your words reminded me that even quiet stories can reach someone who needs them.</p>
+            </article>
+            <article class="garden-letter">
+                <h3>A Reader</h3>
+                <p>Thank you for sharing your thoughts. Your stories feel like pages from a journal.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Article Navigation -->
+    <nav class="article-nav">
+        <a href="wilted-flower.html">&larr; Previous Poem</a>
+        <a href="index.html">Back to Poems &rarr;</a>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <h2 class="footer-title">The Unsent Letters & Stories</h2>
+        <p>A home for quiet thoughts, heartfelt stories, and words left unsent.</p>
+
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../essays.html">Personal Essays</a>
+            <a href="../about.html">About</a>
+        </div>
+
+        <p class="footer-copy">&copy; 2026 Ayhen Narciso. All Rights Reserved.</p>
+    </footer>
+
+    <button id="topButton" aria-label="Back to top">&uarr;</button>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="share-modal">
+        <div class="share-modal-content">
+            <span class="close-share">&times;</span>
+            <h2 class="share-modal-title">Carry this piece with you</h2>
+            <p class="share-modal-description">If these words stayed with you, perhaps they'll stay with someone else too.</p>
+            <div class="share-actions">
+                <button onclick="downloadQuoteCard()" class="share-action-btn">Download Quote Card</button>
+                <button onclick="copyLink()" class="share-action-btn">Copy Poem Link</button>
+                <button onclick="shareFacebook()" class="share-action-btn">Share on Facebook</button>
+                <button onclick="shareX()" class="share-action-btn">Share on X</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
+

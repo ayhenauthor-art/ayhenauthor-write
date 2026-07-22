@@ -32,16 +32,17 @@
 
         <ul class="nav-menu">
             <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="essays.html">Personal Essays</a></li>
             <li><a href="quotes.html">Favorite Lines</a></li>
             <li><a href="about.html">About</a></li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle">More ▾</a>
+                <a href="#" class="dropdown-toggle">Categories ▾</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Poems</a></li>
+                    <li><a href="essays.html">Personal Essays</a></li>
+                    <li><a href="poems/index.html">Poems</a></li>
                     <li><a href="#">Short Stories</a></li>
                     <li><a href="#">Novels</a></li>
                     <li><a href="#">Articles</a></li>
+                    <li><a href="letters-between-us.html">Letters Between Us</a></li>
                 </ul>
             </li>
         </ul>
@@ -65,7 +66,7 @@
                 Welcome to my quiet corner of the internet. Here you'll find essays, poems, stories, and reflections carefully written, lovingly kept, and finally shared.
             </p>
 
-            <a href="essays.html" class="btn">Enter the Library</a>
+            <button id="libraryTrigger" class="btn">Enter the Library</button>
         </div>
     </section>
 
@@ -95,11 +96,11 @@
         </p>
 
         <div class="coming-grid">
-            <div class="coming-card">
+            <a href="poems/index.html" class="coming-card" style="text-decoration:none;color:inherit;display:block;">
                 <span class="card-icon">&#9998;</span>
                 <h3>Poems</h3>
-                <span class="card-status">Coming Soon</span>
-            </div>
+                <span class="card-status">Read Now &rarr;</span>
+            </a>
             <div class="coming-card">
                 <span class="card-icon">&#128214;</span>
                 <h3>Short Stories</h3>
@@ -115,6 +116,11 @@
                 <h3>Articles</h3>
                 <span class="card-status">Coming Soon</span>
             </div>
+            <a href="letters-between-us.html" class="coming-card" style="text-decoration:none;color:inherit;display:block;">
+                <span class="card-icon">&#128220;</span>
+                <h3>Letters Between Us <span class="coming-badge">Coming Soon</span></h3>
+                <span class="card-status">Learn More &rarr;</span>
+            </a>
         </div>
     </section>
 
@@ -129,12 +135,63 @@
             <a href="index.html">Home</a>
             <a href="essays.html">Personal Essays</a>
             <a href="about.html">About</a>
+            <a href="letters-between-us.html">Letters Between Us</a>
         </div>
 
         <p class="footer-copy">&copy; 2026 Ayhen Narciso. All Rights Reserved.</p>
     </footer>
 
     <button id="topButton" aria-label="Back to top">&uarr;</button>
+
+    <!-- Library Entry Modal -->
+    <div class="library-modal" id="libraryModal" role="dialog" aria-modal="true" aria-labelledby="libraryModalTitle" aria-hidden="true">
+        <div class="library-modal-overlay"></div>
+        <div class="library-modal-panel" role="document">
+            <button class="library-modal-close" type="button" aria-label="Close library">&times;</button>
+
+            <p class="library-modal-eyebrow">The Unsent Letters &amp; Stories</p>
+            <h2 id="libraryModalTitle">Choose a Room</h2>
+            <p class="library-modal-intro">Every shelf holds a different kind of quiet. Find the one that calls to you.</p>
+
+            <div class="library-category-grid">
+                <a href="essays.html" class="library-category-card">
+                    <span class="library-category-icon">&#128214;</span>
+                    <span class="library-category-title">Personal Essays</span>
+                    <span class="library-category-badge library-category-badge--available">Available</span>
+                </a>
+
+                <a href="poems/index.html" class="library-category-card">
+                    <span class="library-category-icon">&#127769;</span>
+                    <span class="library-category-title">Poems</span>
+                    <span class="library-category-badge library-category-badge--available">Available</span>
+                </a>
+
+                <div class="library-category-card library-category-card--disabled">
+                    <span class="library-category-icon">&#128214;</span>
+                    <span class="library-category-title">Short Stories</span>
+                    <span class="library-category-badge library-category-badge--coming">Coming Soon</span>
+                </div>
+
+                <div class="library-category-card library-category-card--disabled">
+                    <span class="library-category-icon">&#128218;</span>
+                    <span class="library-category-title">Novels</span>
+                    <span class="library-category-badge library-category-badge--coming">Coming Soon</span>
+                </div>
+
+                <div class="library-category-card library-category-card--disabled">
+                    <span class="library-category-icon">&#128240;</span>
+                    <span class="library-category-title">Articles</span>
+                    <span class="library-category-badge library-category-badge--coming">Coming Soon</span>
+                </div>
+
+                <a href="letters-between-us.html" class="library-category-card" style="text-decoration:none;">
+                    <span class="library-category-icon">&#128220;</span>
+                    <span class="library-category-title">Letters Between Us</span>
+                    <span class="library-category-badge library-category-badge--coming">Coming Soon</span>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

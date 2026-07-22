@@ -31,16 +31,17 @@
 
         <ul class="nav-menu">
             <li><a href="index.html">Home</a></li>
-            <li><a href="essays.html">Personal Essays</a></li>
             <li><a href="quotes.html" class="active">Favorite Lines</a></li>
             <li><a href="about.html">About</a></li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle">More ▾</a>
+                <a href="#" class="dropdown-toggle">Categories ▾</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Poems</a></li>
+                    <li><a href="essays.html">Personal Essays</a></li>
+                    <li><a href="poems/index.html">Poems</a></li>
                     <li><a href="#">Short Stories</a></li>
                     <li><a href="#">Novels</a></li>
                     <li><a href="#">Articles</a></li>
+                    <li><a href="letters-between-us.html">Letters Between Us</a></li>
                 </ul>
             </li>
         </ul>
@@ -48,44 +49,89 @@
 
     <!-- Quotes Page -->
     <main class="quotes-page reveal">
-        <h2>Favorite Lines</h2>
 
-        <p class="quotes-intro">
-            A collection of words from my stories, kept here like pressed flowers.
-        </p>
+        <!-- Header -->
+        <div class="quotes-header">
+            <h2>Favorite Lines</h2>
+            <p class="quotes-intro">
+                A curated gallery of memorable passages from my published works — each one a door back into a larger story.
+            </p>
+        </div>
 
-        <div class="quote-gallery">
-            <div class="line-card">
-                <p>&ldquo;Some memories do not disappear. They simply learn how to become quiet.&rdquo;</p>
-                <span>&mdash; The Unsent Letters and Stories</span>
+        <!-- Controls Toolbar -->
+        <div class="quote-controls-bar" role="toolbar" aria-label="Quote gallery controls">
+            <div class="quote-controls-group">
+                <!-- Search -->
+                <div class="quote-search-wrapper">
+                    <label for="quoteSearch" class="search-label">Search quotes</label>
+                    <svg class="quote-search-icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <input type="text" id="quoteSearch" class="quote-search-input" placeholder="Search a line..." autocomplete="off">
+                </div>
+
+                <!-- Filter -->
+                <div class="quote-filter-wrapper">
+                    <label for="categoryFilter" class="search-label">Filter by category</label>
+                    <select id="categoryFilter" class="quote-select">
+                        <option value="all">All Lines</option>
+                        <option value="essay">Essays</option>
+                        <option value="poem">Poems</option>
+                    </select>
+                </div>
+
+                <!-- Sort -->
+                <div class="quote-filter-wrapper">
+                    <label for="sortOrder" class="search-label">Sort order</label>
+                    <select id="sortOrder" class="quote-select">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="line-card">
-                <p>&ldquo;Not every goodbye is an ending. Some are letters waiting to be understood.&rdquo;</p>
-                <span>&mdash; The Unsent Letters and Stories</span>
+            <!-- Random -->
+            <button id="randomQuoteBtn" class="btn btn-outline btn-random" type="button">
+                <span class="btn-random-icon" aria-hidden="true">&#9851;</span>
+                Random Quote
+            </button>
+        </div>
+
+        <!-- Counter -->
+        <p class="quote-counter" id="quoteCounter" aria-live="polite">Showing <span id="visibleCount">21</span> of <span id="totalCount">21</span> lines</p>
+
+        <!-- Quote Gallery -->
+        <section class="quote-gallery" id="quoteGallery" aria-label="Favorite lines collection">
+            <!-- Cards are rendered by JavaScript -->
+        </section>
+
+        <!-- Empty state -->
+        <div class="quote-empty hidden" id="quoteEmpty" role="status">
+            <p>&#10045;</p>
+            <p>No lines found matching your search.</p>
+        </div>
+
+    </main>
+
+    <!-- Reading Modal -->
+    <div class="reading-modal" id="readingModal" role="dialog" aria-modal="true" aria-labelledby="readingModalTitle" aria-hidden="true">
+        <div class="reading-modal-overlay"></div>
+        <div class="reading-modal-panel" role="document">
+            <button class="reading-modal-close" type="button" aria-label="Close">&times;</button>
+
+            <div class="reading-modal-quote" id="readingModalQuote">
+                <p class="reading-modal-text" id="readingModalText"></p>
             </div>
 
-            <div class="line-card">
-                <p>&ldquo;Every heart carries stories that were never spoken aloud.&rdquo;</p>
-                <span>&mdash; The Unsent Letters and Stories</span>
+            <div class="reading-modal-source">
+                <span class="reading-modal-work" id="readingModalWork"></span>
+                <span class="reading-modal-category" id="readingModalCategory"></span>
             </div>
 
-            <div class="line-card">
-                <p>&ldquo;The brightest flowers still bloom, even when they search for their sun.&rdquo;</p>
-                <span>&mdash; A Sunflower without a Sun</span>
-            </div>
-
-            <div class="line-card">
-                <p>&ldquo;Peace is not found&mdash;it is grown quietly within.&rdquo;</p>
-                <span>&mdash; The Everlasting Peace</span>
-            </div>
-
-            <div class="line-card">
-                <p>&ldquo;The moon never apologizes for shining from afar.&rdquo;</p>
-                <span>&mdash; Moonbound</span>
+            <div class="reading-modal-actions">
+                <a href="#" class="btn" id="readingModalReadBtn" target="_blank">Read Full Piece &rarr;</a>
+                <button class="btn btn-outline" id="readingModalMoreBtn" type="button">View More Quotes from This Work</button>
             </div>
         </div>
-    </main>
+    </div>
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -106,3 +152,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
