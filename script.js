@@ -3,7 +3,111 @@
    Main JavaScript
    ========================================= */
 
-document.addEventListener('DOMContentLoaded', () => {
+// =====================================
+// MODULE-LEVEL CLEANUP TRACKING
+// =====================================
+
+let __scrollHandlers = [];
+let __keydownHandlers = [];
+let __resizeHandlers = [];
+let __storageHandlers = [];
+let __broadcastHandler = null;
+let __initGuard = false;
+
+function __cleanupWindowListeners() {
+  __scrollHandlers.forEach(h => window.removeEventListener('scroll', h));
+  __scrollHandlers = [];
+  __keydownHandlers.forEach(h => document.removeEventListener('keydown', h));
+  __keydownHandlers = [];
+  __resizeHandlers.forEach(h => window.removeEventListener('resize', h));
+  __resizeHandlers = [];
+  __storageHandlers.forEach(h => window.removeEventListener('storage', h));
+  __storageHandlers = [];
+  if (__broadcastHandler) {
+    try {
+      if (window.__broadcastChannel) {
+        window.__broadcastChannel.removeEventListener('message', __broadcastHandler);
+      }
+    } catch (e) {}
+    __broadcastHandler = null;
+  }
+}
+
+// =====================================
+// UTILITY HELPERS
+// =====================================
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function showToast(message) {
+  const existing = document.querySelector('.quote-toast');
+  if (existing) existing.remove();
+
+  const toast = document.createElement('div');
+  toast.className = 'quote-toast';
+  toast.textContent = message;
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+  });
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-50%) translateY(10px)';
+    setTimeout(() => toast.remove(), 300);
+  }, 2200);
+}
+window.showToast = showToast;
+
+// Format a date object into a literary timestamp
+function formatLetterDate(date) {
+  const d = date || new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = d.toLocaleDateString('en-US', options);
+  const formattedTime = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+  return { formattedDate, formattedTime, full: `${formattedDate} at ${formattedTime}`, iso: d.toISOString() };
+}
+
+// =====================================
+// SCROLL REVEAL — Reusable
+// =====================================
+
+window.initScrollReveal = function() {
+  const revealElements = document.querySelectorAll('.reveal');
+  if (revealElements.length > 0 && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+    revealElements.forEach(el => observer.observe(el));
+  } else {
+    revealElements.forEach(el => el.classList.add('visible'));
+  }
+};
+
+// =====================================
+// APP INITIALIZATION
+// =====================================
+
+window.initApp = function() {
+
+  // Clean up any previous listeners before re-initializing
+  __cleanupWindowListeners();
 
   // =====================================
   // MOBILE NAVIGATION
@@ -42,23 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // SCROLL REVEAL
   // =====================================
 
-  const revealElements = document.querySelectorAll('.reveal');
-  if (revealElements.length > 0 && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-    revealElements.forEach(el => observer.observe(el));
-  } else {
-    revealElements.forEach(el => el.classList.add('visible'));
-  }
+  window.initScrollReveal();
 
   // =====================================
   // BACK TO TOP
@@ -305,48 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const instagramGuide = setupInstagramGuideModal();
-
-  // =====================================
-  // PIECE METADATA — Auto-detect
-  // =====================================
-
-  function getPieceMeta() {
-    const title = document.querySelector('title')?.textContent?.replace(' | The Unsent Letters & Stories', '').trim() || 'Untitled';
-    const quoteEl = document.querySelector('.quote-text');
-    const authorEl = document.querySelector('.quote-author');
-
-    let quote = '';
-    if (quoteEl) {
-      quote = quoteEl.textContent.trim();
-      // Remove surrounding curly quotes if present
-      quote = quote.replace(/^[\u201C\u201D"]|[\u201C\u201D"]$/g, '').trim();
-    }
-
-    // Clean author attribution
-    let pieceTitle = title;
-    if (authorEl) {
-      const authorText = authorEl.textContent.trim().replace(/^—\s*/, '').trim();
-      if (authorText) pieceTitle = authorText;
-    }
-
-    const url = window.location.href;
-    // Detect if on a poem page
-    const isPoem = document.querySelector('.poem-stanza') !== null || document.querySelector('.article-page.poem-') !== null || window.location.pathname.includes('/poems/');
-
-    return { title: pieceTitle, quote, url, isPoem };
-  }
-
-  // =====================================
-  // OPEN SHARE MODAL
-  // =====================================
-
-  window.shareThisPiece = function() {
-    const modal = document.getElementById('shareModal');
-    if (modal) {
-      modal.style.display = 'block';
-      document.body.classList.add('share-modal-open');
-    }
-  };
+  window.instagramGuide = instagramGuide;
 
   // =====================================
   // TOAST NOTIFICATION
@@ -374,326 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => toast.remove(), 300);
     }, 2200);
   }
-
-  // =====================================
-  // COPY LINK
-  // =====================================
-
-  window.copyLink = function() {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      showToast('Link copied.');
-      // Close the share modal
-      const modal = document.getElementById('shareModal');
-      if (modal) {
-        modal.style.display = 'none';
-        document.body.classList.remove('share-modal-open');
-      }
-    }).catch(() => {
-      // Fallback
-      const ta = document.createElement('textarea');
-      ta.value = window.location.href;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      showToast('Link copied.');
-      const modal = document.getElementById('shareModal');
-      if (modal) {
-        modal.style.display = 'none';
-        document.body.classList.remove('share-modal-open');
-      }
-    });
-  };
-
-  // =====================================
-  // SHARE ON FACEBOOK
-  // =====================================
-
-  window.shareFacebook = function() {
-    const url = encodeURIComponent(window.location.href);
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'noopener,noreferrer,width=600,height=400');
-    const modal = document.getElementById('shareModal');
-    if (modal) {
-      modal.style.display = 'none';
-      document.body.classList.remove('share-modal-open');
-    }
-  };
-
-  // =====================================
-  // SHARE ON X (TWITTER)
-  // =====================================
-
-  window.shareX = function() {
-    const meta = getPieceMeta();
-    const text = encodeURIComponent(`"${meta.quote}" — ${meta.title}`);
-    const url = encodeURIComponent(window.location.href);
-    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'noopener,noreferrer,width=600,height=400');
-    const modal = document.getElementById('shareModal');
-    if (modal) {
-      modal.style.display = 'none';
-      document.body.classList.remove('share-modal-open');
-    }
-  };
-
-  // =====================================
-  // DOWNLOAD QUOTE CARD — Canvas Generator
-  // =====================================
-
-  function getThemeColors() {
-    const isMoonlight = document.documentElement.getAttribute('data-theme') === 'moonlight';
-    return {
-      isMoonlight,
-      bg: isMoonlight ? '#171614' : '#F7F6F2',
-      surface: isMoonlight ? '#2B2926' : '#FFFFFF',
-      textPrimary: isMoonlight ? '#F2EEDF' : '#2F3A2F',
-      textSecondary: isMoonlight ? '#C8C1B4' : '#5F695D',
-      accent: isMoonlight ? '#d0a95f' : '#B8860B',
-      accentGreen: isMoonlight ? '#84977a' : '#355E3B',
-      gold: isMoonlight ? '#e4c782' : '#F6D365',
-      border: isMoonlight ? 'rgba(215, 203, 181, 0.16)' : 'rgba(53, 94, 59, 0.12)',
-    };
-  }
-
-  function loadImage(src) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = () => resolve(img);
-      img.onerror = () => resolve(null);
-      img.src = src;
-    });
-  }
-
-  window.downloadQuoteCard = async function(format = 'instagram-post') {
-    const modal = document.getElementById('shareModal');
-    const closeModal = () => {
-      if (modal) {
-        modal.style.display = 'none';
-        document.body.classList.remove('share-modal-open');
-      }
-    };
-
-    // Show loading toast
-    showToast('Generating your quote card...');
-
-    const meta = getPieceMeta();
-    const colors = getThemeColors();
-
-    // Canvas dimensions
-    const isStory = format === 'instagram-story';
-    const width = 1080;
-    const height = isStory ? 1920 : 1350;
-
-    // Create canvas
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext('2d');
-
-    // Background
-    ctx.fillStyle = colors.bg;
-    ctx.fillRect(0, 0, width, height);
-
-    // Subtle paper texture
-    ctx.globalAlpha = 0.03;
-    for (let i = 0; i < 200; i++) {
-      const x = Math.random() * width;
-      const y = Math.random() * height;
-      ctx.fillStyle = colors.accent;
-      ctx.beginPath();
-      ctx.arc(x, y, Math.random() * 3 + 1, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-
-    // Decorative border
-    const margin = 40;
-    ctx.strokeStyle = colors.border;
-    ctx.lineWidth = 1;
-    ctx.strokeRect(margin, margin, width - margin * 2, height - margin * 2);
-
-    // Inner border
-    const innerMargin = 48;
-    ctx.strokeStyle = colors.border;
-    ctx.lineWidth = 1;
-    ctx.strokeRect(innerMargin, innerMargin, width - innerMargin * 2, height - innerMargin * 2);
-
-    // Top decorative line
-    ctx.strokeStyle = colors.accent;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(width * 0.3, 90);
-    ctx.lineTo(width * 0.7, 90);
-    ctx.stroke();
-
-    // Small flourish at top
-    ctx.fillStyle = colors.accent;
-    ctx.font = '36px "Cormorant Garamond", Georgia, serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('\u2742', width / 2, 155);
-
-    // Quote text
-    const quoteText = meta.quote || 'The sun never loved the sunflower. The sunflower only loved the sun.';
-    const maxQuoteWidth = width - 180;
-
-    // Dynamic font sizing for quote
-    let quoteFontSize = 42;
-    ctx.font = `italic ${quoteFontSize}px "Cormorant Garamond", Georgia, serif`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-
-    // Measure and adjust font size
-    let textMetrics = ctx.measureText(quoteText);
-    while (textMetrics.width > maxQuoteWidth && quoteFontSize > 24) {
-      quoteFontSize -= 2;
-      ctx.font = `italic ${quoteFontSize}px "Cormorant Garamond", Georgia, serif`;
-      textMetrics = ctx.measureText(quoteText);
-    }
-
-    // Quote position (vertically centered, adjusted for story vs post)
-    const quoteY = isStory ? height * 0.40 : height * 0.42;
-
-    // Opening quote mark
-    ctx.fillStyle = colors.accent;
-    ctx.globalAlpha = 0.15;
-    ctx.font = '120px "Cormorant Garamond", Georgia, serif';
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'top';
-    ctx.fillText('\u201C', width * 0.15, quoteY - 60);
-    ctx.globalAlpha = 1;
-
-    // Quote text
-    ctx.fillStyle = colors.textPrimary;
-    ctx.font = `italic ${quoteFontSize}px "Cormorant Garamond", Georgia, serif`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-
-    // Word wrap the quote
-    const words = quoteText.split(' ');
-    const lines = [];
-    let currentLine = '';
-    for (const word of words) {
-      const testLine = currentLine ? currentLine + ' ' + word : word;
-      const metrics = ctx.measureText(testLine);
-      if (metrics.width > maxQuoteWidth && currentLine) {
-        lines.push(currentLine);
-        currentLine = word;
-      } else {
-        currentLine = testLine;
-      }
-    }
-    if (currentLine) lines.push(currentLine);
-
-    const lineHeight = quoteFontSize * 1.5;
-    const startY = quoteY - (lines.length - 1) * lineHeight / 2;
-
-    for (let i = 0; i < lines.length; i++) {
-      ctx.fillText(lines[i], width / 2, startY + i * lineHeight);
-    }
-
-    // Bottom decorative line
-    const bottomLineY = isStory ? height * 0.68 : height * 0.68;
-    ctx.strokeStyle = colors.accent;
-    ctx.lineWidth = 1;
-    ctx.globalAlpha = 0.4;
-    ctx.beginPath();
-    ctx.moveTo(width * 0.35, bottomLineY);
-    ctx.lineTo(width * 0.65, bottomLineY);
-    ctx.stroke();
-    ctx.globalAlpha = 1;
-
-    // Piece title
-    ctx.fillStyle = colors.accentGreen;
-    ctx.font = '26px "Cormorant Garamond", Georgia, serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(meta.title || 'Untitled', width / 2, bottomLineY + 60);
-
-    // Author
-    ctx.fillStyle = colors.textSecondary;
-    ctx.font = '20px "Inter", sans-serif';
-    ctx.fillText('— Ayhen A. Narciso', width / 2, bottomLineY + 110);
-
-    // Bottom branding area
-    const brandY = height - 120;
-
-    // Small separator
-    ctx.strokeStyle = colors.border;
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(width * 0.4, brandY - 25);
-    ctx.lineTo(width * 0.6, brandY - 25);
-    ctx.stroke();
-
-    // Branding
-    ctx.fillStyle = colors.accent;
-    ctx.font = '24px "Cormorant Garamond", Georgia, serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('The Unsent Letters & Stories', width / 2, brandY + 10);
-
-    // URL
-    ctx.fillStyle = colors.textSecondary;
-    ctx.font = '16px "Inter", sans-serif';
-    ctx.globalAlpha = 0.7;
-    ctx.fillText('ayhenauthor-write.vercel.app', width / 2, brandY + 55);
-    ctx.globalAlpha = 1;
-
-    // Bottom flourish
-    ctx.fillStyle = colors.accent;
-    ctx.globalAlpha = 0.3;
-    ctx.font = '22px "Cormorant Garamond", Georgia, serif';
-    ctx.fillText('\u2742', width / 2, height - 45);
-    ctx.globalAlpha = 1;
-
-    // Convert to blob and download
-    try {
-      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-      if (!blob) throw new Error('Failed to create image');
-
-      const link = document.createElement('a');
-      link.download = `unsent-quote-${meta.title.toLowerCase().replace(/\s+/g, '-')}-${isStory ? 'story' : 'post'}.png`;
-      link.href = URL.createObjectURL(blob);
-      link.click();
-
-      // Clean up
-      setTimeout(() => URL.revokeObjectURL(link.href), 1000);
-
-      // Close the share modal
-      closeModal();
-
-      // Show success toast
-      showToast('Quote card downloaded!');
-
-      return blob;
-    } catch (err) {
-      console.error('Failed to generate quote card:', err);
-      showToast('Could not generate image. Try copying the link instead.');
-      return null;
-    }
-  };
-
-  // =====================================
-  // SHARE TO INSTAGRAM STORY
-  // =====================================
-
-  window.shareToInstagramStory = async function() {
-    const blob = await window.downloadQuoteCard('instagram-story');
-    if (blob && instagramGuide) {
-      setTimeout(() => instagramGuide.open('story'), 500);
-    }
-  };
-
-  // =====================================
-  // SHARE TO INSTAGRAM POST
-  // =====================================
-
-  window.shareToInstagramPost = async function() {
-    const blob = await window.downloadQuoteCard('instagram-post');
-    if (blob && instagramGuide) {
-      setTimeout(() => instagramGuide.open('post'), 500);
-    }
-  };
+  window.showToast = showToast;
 
   // =====================================
   // ENHANCED LETTER SYSTEM — Per-Article, Timestamps, Reactions, Replies
@@ -1404,5 +1132,10 @@ document.addEventListener('DOMContentLoaded', () => {
   activeData = [...QUOTES_DATA];
   applySort(activeData);
 
+};
+
+// Auto-initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+  window.initApp();
 });
 

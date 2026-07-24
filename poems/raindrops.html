@@ -59,6 +59,7 @@
                     <li><a href="#">Short Stories</a></li>
                     <li><a href="#">Novels</a></li>
                     <li><a href="#">Articles</a></li>
+                    <li><a href="../write-to-us.html">Write to Us</a></li>
                 </ul>
             </li>
         </ul>
@@ -196,6 +197,7 @@
             <a href="../index.html">Home</a>
             <a href="../essays.html">Personal Essays</a>
             <a href="../about.html">About</a>
+            <a href="../write-to-us.html">Write to Us</a>
         </div>
 
         <p class="footer-copy">&copy; 2026 Ayhen Narciso. All Rights Reserved.</p>
@@ -206,18 +208,43 @@
     <!-- Share Modal -->
     <div id="shareModal" class="share-modal">
         <div class="share-modal-content">
-            <span class="close-share">&times;</span>
-            <h2 class="share-modal-title">Carry this piece with you</h2>
-            <p class="share-modal-description">If these words stayed with you, perhaps they'll stay with someone else too.</p>
-            <div class="share-actions">
-                <button onclick="shareThisPiece()" class="share-action-btn share-action-btn--primary">&#x2795; Share This Piece</button>
-                <button onclick="downloadQuoteCard('instagram-post')" class="share-action-btn">Download Quote Card</button>
-                <button onclick="copyLink()" class="share-action-btn">Copy Poem Link</button>
-                <button onclick="shareFacebook()" class="share-action-btn">Share on Facebook</button>
-                <button onclick="shareX()" class="share-action-btn">Share on X</button>
-                <div class="share-action-btn-group">
-                    <button onclick="shareToInstagramStory()" class="share-action-btn share-action-btn--instagram">&#x1F4F8; Share to Story</button>
-                    <button onclick="shareToInstagramPost()" class="share-action-btn share-action-btn--instagram">&#x1F4F7; Share to Post</button>
+            <div class="share-modal-header">
+                <div class="share-modal-header-text">
+                    <h2 class="share-modal-title">Carry this piece with you</h2>
+                    <p class="share-modal-description">If these words stayed with you, perhaps they'll stay with someone else too.</p>
+                </div>
+                <button class="close-share" aria-label="Close share modal">&times;</button>
+            </div>
+            <div class="share-modal-body">
+                <div class="share-actions">
+
+                    <button onclick="shareThisPiece()" class="share-action-btn--primary">&#x2795; Share This Piece</button>
+
+                    <div class="share-section-row">Visual Content</div>
+
+                    <div class="share-grid-2">
+                        <button onclick="downloadQuoteCard('instagram-post')" class="share-action-btn">&#x1F4F7; Quote Card</button>
+                        <button onclick="downloadPromoCard()" class="share-action-btn">&#x1F3F7; Promo Card</button>
+                    </div>
+
+                    <div class="share-grid-2">
+                        <button onclick="copyImage('quote')" class="share-action-btn">&#x1F4CB; Copy Image</button>
+                        <button onclick="saveToDevice('quote')" class="share-action-btn">&#x1F4BE; Save to Device</button>
+                    </div>
+
+                    <div class="share-section-row">Social Media</div>
+
+                    <div class="share-grid-social">
+                        <button onclick="shareFacebook()" class="share-action-btn">&#x1F4F1; FB</button>
+                        <button onclick="shareX()" class="share-action-btn">&#x1D54F; X</button>
+                        <button onclick="shareToInstagramStory()" class="share-action-btn share-action-btn--instagram">&#x1F4F8; Story</button>
+                    </div>
+
+                    <div class="share-section-row">Link &amp; Share</div>
+
+                    <button onclick="copyLink()" class="share-action-btn share-action-btn--link">&#x1F517; Copy Poem Link</button>
+                    <button onclick="nativeShare()" class="share-action-btn share-action-btn--link" style="background:var(--accent);color:var(--text-on-accent);border:none;">&#x1F30D; Share via...</button>
+
                 </div>
             </div>
         </div>
@@ -245,6 +272,7 @@
         </div>
     </div>
 
+    <script src="../share.js"></script>
     <script src="../script.js"></script>
 </body>
 </html>
