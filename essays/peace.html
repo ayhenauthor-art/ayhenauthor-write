@@ -133,7 +133,7 @@
     <section class="share-card reveal">
         <h3>Enjoyed this piece?</h3>
         <p>Share a favorite quote with your friends.</p>
-        <button class="btn" onclick="openShareModal()">Share Quote</button>
+        <button class="btn" onclick="shareThisPiece()">Share Quote</button>
     </section>
 
     <!-- Quote Section -->
@@ -152,29 +152,36 @@
         </div>
     </section>
 
-    <!-- Letters Section -->
-    <section class="letters-section reveal">
-        <div class="flower-decoration">&#9676; &#9676; &#9676;</div>
-        <div class="letters-header">
-            <h2>Leave a Letter</h2>
-            <p>Every story finds a reader. If these words found you, you're welcome to leave a letter.</p>
+    <!-- Write a Letter -->
+    <section class="letter-writing-section reveal">
+        <div class="letter-welcome">
+            <span class="letter-welcome-icon">&#9993;</span>
+            <h2>Write a Letter</h2>
+            <p>This piece found you for a reason. If it stirred something in your heart, leave a letter — your words become part of this growing literary garden.</p>
         </div>
 
-        <form id="letterForm" class="letter-form">
-            <input type="text" id="readerName" placeholder="Your name (or a nickname)" maxlength="40" required>
-            <textarea id="readerLetter" placeholder="Write your thoughts here..." maxlength="800" required></textarea>
-            <button type="submit">Leave this Letter</button>
-        </form>
+        <div class="letter-composition">
+            <form id="letterFormWarm" class="letter-form-warm">
+                <input type="text" id="warmReaderName" placeholder="Your name (or a nickname)" maxlength="40" required>
+                <textarea id="warmReaderLetter" placeholder="Write your thoughts here..." maxlength="800" required></textarea>
+                <div class="letter-submit-area">
+                    <button type="submit" class="btn-submit-letter">Leave this Letter</button>
+                    <p class="letter-form-note">Your letter will appear below and become part of the garden.</p>
+                </div>
+            </form>
+        </div>
     </section>
 
     <!-- Reader Letters -->
     <section class="reader-letters reveal">
-        <h2>Letters from Readers</h2>
-        <p class="no-letters">Be the first to leave a letter.</p>
+        <div class="reader-letters-header">
+            <h2>Letters from Readers</h2>
+            <p>Quiet words left by those who found comfort in this piece.</p>
+        </div>
         <div id="lettersContainer"></div>
     </section>
 
-    <!-- Garden Letters -->
+    <!-- Garden Letters (Kept) -->
     <section class="garden-letters reveal">
         <div class="garden-header">
             <h2>Letters Kept in the Garden</h2>
@@ -185,10 +192,12 @@
             <article class="garden-letter">
                 <h3>Maria</h3>
                 <p>Your words reminded me that even quiet stories can reach someone who needs them.</p>
+                <span class="garden-letter-date">Kept since July 2026</span>
             </article>
             <article class="garden-letter">
                 <h3>A Reader</h3>
                 <p>Thank you for sharing your thoughts. Your stories feel like pages from a journal.</p>
+                <span class="garden-letter-date">Kept since July 2026</span>
             </article>
         </div>
     </section>
@@ -222,10 +231,37 @@
             <h2 class="share-modal-title">Carry this piece with you</h2>
             <p class="share-modal-description">If these words stayed with you, perhaps they'll stay with someone else too.</p>
             <div class="share-actions">
-                <button onclick="downloadQuoteCard()" class="share-action-btn">Download Quote Card</button>
+                <button onclick="shareThisPiece()" class="share-action-btn share-action-btn--primary">&#x2795; Share This Piece</button>
+                <button onclick="downloadQuoteCard('instagram-post')" class="share-action-btn">Download Quote Card</button>
                 <button onclick="copyLink()" class="share-action-btn">Copy Essay Link</button>
                 <button onclick="shareFacebook()" class="share-action-btn">Share on Facebook</button>
                 <button onclick="shareX()" class="share-action-btn">Share on X</button>
+                <div class="share-action-btn-group">
+                    <button onclick="shareToInstagramStory()" class="share-action-btn share-action-btn--instagram">&#x1F4F8; Share to Story</button>
+                    <button onclick="shareToInstagramPost()" class="share-action-btn share-action-btn--instagram">&#x1F4F7; Share to Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instagram Guide Modal -->
+    <div id="instagramGuideModal" class="instagram-guide-modal" role="dialog" aria-modal="true" aria-labelledby="instagramGuideTitle" aria-hidden="true">
+        <div class="instagram-guide-overlay"></div>
+        <div class="instagram-guide-panel">
+            <button class="instagram-guide-close" type="button" aria-label="Close Instagram guide">&times;</button>
+            <div class="instagram-guide-content">
+                <div class="instagram-guide-icon">&#128247;</div>
+                <h2 id="instagramGuideTitle">Share to Instagram</h2>
+                <p class="instagram-guide-intro">Your quote card has been downloaded. Here's how to share it:</p>
+                <ol class="instagram-guide-steps">
+                    <li><strong>Open Instagram</strong> on your mobile device.</li>
+                    <li id="instagramStepAction"><strong>Tap Create</strong> (the + icon) and select <strong>Story</strong> or <strong>Post</strong>.</li>
+                    <li><strong>Select the downloaded image</strong> from your gallery.</li>
+                    <li>Resize, add stickers, or keep it as is — it's already formatted perfectly.</li>
+                    <li><strong>Share</strong> and tag <strong>@theunsentletters</strong> so we can see it!</li>
+                </ol>
+                <p class="instagram-guide-note">Your quote card has been saved to your downloads folder.</p>
+                <button class="btn instagram-guide-done" type="button">Got it</button>
             </div>
         </div>
     </div>

@@ -1,13 +1,21 @@
-# TODO: Add "Letters Between Us" Category
+# Homepage Library Sections Refinement
 
-## Steps
+## Progress Tracking
 
-- [x] Step 1: Create TODO.md
-- [x] Step 2: Create `letters-between-us.html` (dedicated landing page)
-- [x] Step 3: Update `style.css` (add styles for new page, coming badge, invitation card, disabled button)
-- [x] Step 4: Update `index.html` (nav dropdown, coming soon grid, library modal, footer)
-- [x] Step 5: Update `about.html`, `essays.html`, `quotes.html`, `404.html` (nav dropdown)
-- [x] Step 6: Update `poems/index.html` (nav dropdown)
-- [x] Step 7: Update `script.js` (Guide to the Archive)
-- [x] All done
+- [x] Plan approved
+- [x] Edit index.html — Restructure sections
+  - [x] Refine Start Here section (metadata, paper texture, premium button)
+  - [x] Add Fresh Reads section with carousel
+  - [x] Refine More Stories Are Growing (remove Poems, add descriptions)
+  - [x] Polish layout (dividers, spacing)
+- [x] Edit style.css — Add new styles
+  - [x] Start Here refinement styles (paper texture, meta, hover)
+  - [x] Fresh Reads carousel styles
+  - [x] More Stories Are Growing refinement (card-desc, coming-badge)
+  - [x] Layout polish
+- [x] Edit script.js — Add carousel interactivity
+  - [x] Arrow button navigation
+  - [x] Mouse drag support
+  - [x] Touch swipe support
+- [x] Final review and testing
 

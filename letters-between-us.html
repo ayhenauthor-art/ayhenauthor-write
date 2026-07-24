@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body class="letters-page">
+<body class="letters-popup-page">
 
     <!-- Navigation -->
     <nav>
@@ -47,42 +47,27 @@
         </ul>
     </nav>
 
-    <!-- Letters Between Us Hero -->
-    <section class="letters-hero reveal">
-        <div class="letters-hero-content">
-            <span class="letters-hero-icon" aria-hidden="true">&#128220;</span>
-            <h1>Letters Between Us</h1>
-            <p class="letters-hero-description">
-                Every memorable story begins with a conversation. Letters Between Us is a future home for collaborative writing, where writers, poets, and storytellers come together to create works that reflect shared ideas, different voices, and a love for literature. Though this collection has not yet opened, its pages are waiting for the stories we'll write together.
-            </p>
-        </div>
-    </section>
+    <!-- Elegant Popup Card Section -->
+    <section class="letter-popup-section">
+        <div class="letter-popup-card">
 
-    <div class="section-divider">&#9676; &#9676; &#9676;</div>
+            <span class="letter-popup-flourish">✦ ✦ ✦</span>
 
-    <!-- Invitation Card -->
-    <section class="letters-invitation reveal">
-        <div class="letters-invitation-card">
-            <div class="letters-invitation-icon" aria-hidden="true">&#128231;</div>
-            <h2>Collaboration Status</h2>
-            <span class="letters-status-badge">Opening Soon</span>
-            <p class="letters-invitation-text">
-                This collection is currently being prepared. When submissions open, writers will be invited to share collaborative works that may become part of The Unsent Letters &amp; Stories. We hope you'll be one of them.
+            <span class="letter-popup-badge">Coming Soon</span>
+
+            <h1 class="letter-popup-title">Letters Between Us</h1>
+
+            <p class="letter-popup-text">
+                <em>&mdash;</em> Letters Between Us is a space that is still quietly growing. In time, it will become a home for thoughtful letters from readers, collaborative stories, creative writing prompts, and guest contributions from fellow writers. More than a collection, it is an invitation to write with me, to share your voice, and to become part of a community that believes stories are meant to connect people. Until then, I invite you to explore the essays and poems already living within this library. If a piece speaks to you, leave a letter. Your words may one day find a home here, between us.
             </p>
-            <button class="letters-btn-disabled" type="button" disabled aria-disabled="true">
-                Join the Waiting List &bull; Opening Soon
+
+            <button class="letter-popup-btn" onclick="event.stopPropagation(); window.location.href='essays.html'">
+                Explore the Library &rarr;
             </button>
+
+            <p class="letter-popup-signature">With warmth, &mdash; Ayhen</p>
+
         </div>
-    </section>
-
-    <div class="section-divider">&#9676; &#9676; &#9676;</div>
-
-    <!-- Closing Message -->
-    <section class="letters-closing reveal">
-        <p class="letters-closing-text">
-            Thank you for believing in stories that are stronger when written together. We look forward to welcoming your words in the future.
-        </p>
-        <div class="letters-closing-decoration" aria-hidden="true">&#10045; &#10045; &#10045;</div>
     </section>
 
     <!-- Footer -->
@@ -105,4 +90,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
